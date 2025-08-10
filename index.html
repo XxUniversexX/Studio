@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NineHeavens Studio</title>
+    <link rel="icon" href="image/logo.ico">
+    <style>
+        @font-face {
+            font-family: "DIN";
+            font-style: normal;
+            font-weight: 300 500;
+            font-display: swap;
+            src: url(https://db.onlinewebfonts.com/t/43c793eb9fcfce5efd986389cceb93d0.woff2) format("woff2");
+            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+        }
+
+        @font-face {
+            font-family: "DIN";
+            font-style: normal;
+            font-weight: 200 400;
+            font-display: swap;
+            src: url(https://db.onlinewebfonts.com/t/43c793eb9fcfce5efd986389cceb93d0.woff2) format("woff2");
+            unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        @font-face {
+            font-family: "DIN";
+            font-style: normal;
+            font-weight: 300 500;
+            font-display: swap;
+            src: url(https://db.onlinewebfonts.com/t/43c793eb9fcfce5efd986389cceb93d0.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e6e6e6;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            display: flex;
+            position: relative;
+            overflow-x: hidden;
+            font-family: DIN, sans-serif;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(79, 172, 254, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.1) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline; 
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            background: rgba(10, 15, 30, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 15px rgba(0, 242, 254, 0.4);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            border-radius: 3px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #a0a0c0;
+            padding: 0 20px;
+            font-weight: 300;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: rgba(25, 30, 50, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 242, 254, 0.4);
+        }
+        
+        .card h2 {
+            color: #4facfe;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(79, 172, 254, 0.3);
+        }
+        
+        .card h3 {
+            color: #00f2fe;
+            margin: 15px 0 10px;
+            font-size: 1.3rem;
+        }
+        
+        .card ol {
+            padding-left: 25px;
+        }
+        
+        .card ol li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+        
+        .card p {
+            color: #c0c0e0;
+            line-height: 1.7;
+        }
+        
+        .preview {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 30px;
+            background: rgba(25, 30, 50, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            backdrop-filter: blur(5px);
+            margin-bottom: 30px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .feature {
+            background: rgba(30, 35, 55, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: transform 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: #00f2fe;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .feature h3 {
+            color: #4facfe;
+            margin-bottom: 8px;
+        }
+        
+        .feature p {
+            color: #a0a0c0;
+            font-size: 0.95rem;
+        }
+        
+        .notification {
+            position: relative;
+            background: rgba(0, 200, 200, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            z-index: 10000;
+            box-shadow: 0 0 20px rgba(0, 200, 200, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.5s ease-out;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .notification.exit {
+            transform: translateX(100%) scale(0.8);
+            opacity: 0;
+        }
+        
+        .notification.error {
+            background: rgba(255, 50, 50, 0.9);
+            box-shadow: 0 0 20px rgba(255, 50, 50, 0.7);
+        }
+        
+        .notification-icon {
+            font-size: 1.5rem;
+        }
+        
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10000;
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 3s) infinite ease-in-out;
+            opacity: 0;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .notification-container {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="notification-container" id="notificationContainer"></div>
+    
+    <div class="container">
+        <header>
+            <h1>NineHeavens Studio</h1>
+            <p class="subtitle">一个会python、Java的小学生,B站账号:_XxUniversexX_</p>
+        </header>
+        
+        <div class="content">
+            <div class="card">
+                <h2>Bloxd Studio <a href="https://xxuniversexx.github.io/Bloxd/">[跳转]</a></h2>
+                <h3>最新动态</h3>
+                <p>2025/08/10 完成html的主体部分</p>
+                <p>2025/08/10 完成Relonix UI(Rounding)的导入及下载</p>
+                <p>2025/08/10 完成在线状态模块的更新</p>
+                <p>2025/08/10 Bloxd UI用户脚本已完成主体部分,预计下个月完成测试版</p>
+                <p>2025/08/10 优化资源下载模块的冷却</p>
+            </div>
+            
+            <div class="card">
+                <h2>Minecraft Studio</h2>
+                <h3>最近动态</h3>
+                <p>2025/08/11完成主体框架</p>
+                <p>2025/08/11发布1.16.5~1.21.6的Performance Fabric整合包Alpha0.0.1</p>
+                <p>2025/08/11发布1.21.4 Meteor Client的高性能整合包</p>
+            </div>
+        </div>
+                
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚠️</div>
+                <div>
+                    <h3>注意</h3>
+                    <p>请不要发骚扰信息,否则拉黑</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📜</div>
+                <div>
+                    <h3>信息</h3>
+                    <p>发布内容以经过多次检查,bug反馈github</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🌐</div>
+                <div>
+                    <h3>祝愿</h3>
+                    <p>祝网络环境越来越好</p>
+                </div>
+            </div>
+        </div>                
+    </div>
+    
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        createStars();
+    </script>
+</body>
+</html>
